@@ -1,24 +1,28 @@
 from django.shortcuts import render
 from app.models import *
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
 
 def contact(request):
-    return render(request, 'contact.html')
+     if request.method=='POST':
+         mail = request.POST['mail']
+         name = request.POST['name']
+         subject = request.POST['subject']
+         msg = request.POST['message']
+         a=contactMessage(name=name,email=mail,subject=subject,message=msg)
+         a.save()
+         return HttpResponseRedirect('/contact')
+     else:
+         return render(request, 'contact.html')
 
 def blog(request):
-    return render(request, 'blog.html')
+    ss = event.objects.all()
+    return render(request, 'blog.html',{"eve": ss})
 
 def aboutus(request):
     return render(request, 'aboutus.html')
 
-def contactmsg(request):
-     name = request.GET.get('name')
-     mail = request.GET.get('mail')
-     subject = request.GET.get('subject')
-     msg = request.GET.get('msg')
-     a=contactMessage(name=name,email=mail,subject=subject,message=msg)
-     a.save()
-     return JsonResponse("s")
+
+   

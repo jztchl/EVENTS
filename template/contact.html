@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -6,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Pranav Events</title>
+    
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -75,7 +77,7 @@
     <div class="container">
         <div class="main-content">
             <div class="contact-page-map">
-                <iframe id="gmap_canvas" src="https://maps.google.com/maps?q=university of san francisco&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                <iframe id="gmap_canvas" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1952.9531494038588!2d75.46540897528692!3d11.771648099422928!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba427d18b383b69%3A0xfd2cad67486ea420!2sPranav%20light%20and%20sound!5e0!3m2!1sen!2sin!4v1654605498128!5m2!1sen!2sin" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
             </div><!-- map -->
 
             <div class="contact-details">
@@ -155,27 +157,29 @@
                 </div><!-- entry-content -->
 
                 <div class="contact-form">
+                    <form action="/contact/" method="POST">
+                        {% csrf_token %}
                     <div class="row">
                         <div class="col-12 col-md-6">
-                            <input type="text" id="name" placeholder="Your name">
+                            <input type="text" name="name" id="name" placeholder="Your name">
                         </div><!-- col-4 -->
 
                         <div class="col-12 col-md-6">
-                            <input type="email"  id="mail" placeholder="Your email">
+                            <input type="email"  name="mail"  id="mail" placeholder="Your email">
                         </div><!-- col-6 -->
 
                         <div class="col-12">
-                            <input type="text" id="subject" placeholder="Subject">
+                            <input type="text" name="subject" id="subject" placeholder="Subject">
                         </div>
 
                         <div class="col-12">
-                            <textarea name="name" rows="8" cols="80" id="msg" placeholder="message"></textarea>
+                            <textarea name="message" rows="8" cols="80" id="message" placeholder="message"></textarea>
                         </div>
 
                         <div class="col-12 submit flex justify-content-center">
-                            <input type="submit" id="send" value="send message" class="btn">
+                            <input type="submit" id="send" value="submit" action="submit"class="btn" onclick="ppp();">
                         </div>
-
+                    </form>
                     </div><!-- row -->
                 </div><!-- contact-form -->
             </div><!-- newsletter-subscribe -->
@@ -221,44 +225,24 @@
         </div><!-- footer-content-wrapper -->
     </footer><!-- site-footer -->
     
-    <script type='text/javascript' src='static/js/jquery.js'></script>
-    <script type='text/javascript' src='static/js/masonry.pkgd.min.js'></script>
-    <script type='text/javascript' src='static/js/jquery.collapsible.min.js'></script>
-    <script type='text/javascript' src='static/js/swiper.min.js'></script>
-    <script type='text/javascript' src='static/js/jquery.countdown.min.js'></script>
-    <script type='text/javascript' src='static/js/circle-progress.min.js'></script>
-    <script type='text/javascript' src='static/js/jquery.countTo.min.js'></script>
-    <script type='text/javascript' src='static/js/custom.js'></script>
-    <script type='text/javascript' src='static/js/jquery.js'></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('send').addEventListener('click', sendMsg);
-    });
+    <script type='text/javascript' src='/static/js/jquery.js'></script>
+    <script type='text/javascript' src='/static/js/masonry.pkgd.min.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.collapsible.min.js'></script>
+    <script type='text/javascript' src='/static/js/swiper.min.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.countdown.min.js'></script>
+    <script type='text/javascript' src='/static/js/circle-progress.min.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.countTo.min.js'></script>
+    <script type='text/javascript' src='/static/js/custom.js'></script>
+    <script type='text/javascript' src='/static/js/jquery.js'></script>
+<script>
 
-        function sendMsg()
-        {
-             let name= document.getElementById('name').value;
-             let mail=document.getElementById('mail').value;
-             let subject= document.getElementById('subject').value;
-             let msg= document.getElementById('msg').value;
-             $.ajax({
-                type: "POST",
-                url: "/contactmsg/",
-                data: 
-                {
-                  "name": name,
-                  "mail": mail,
-                  "subject": subject,
-                  "msg": msg
-                },
-                success: function (result) 
-                {
-                    alert("successfully sent");
+    function ppp(){
+        window.confirm("click ok to sent mail!");
+    }
+</script>
 
-                } 
-                   });
-        }
+
     
-        </script>
+    
     </body>
     </html>

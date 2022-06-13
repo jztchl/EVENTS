@@ -22,5 +22,4 @@ path('',views.index),
 path('contact/',views.contact),
 path('blog/',views.blog),
 path('aboutus/',views.aboutus),
-path('contactmsg/',views.contactmsg),
 ]
